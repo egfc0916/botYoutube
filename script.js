@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 require("dotenv").config();
-
-(async () => {
+const scrapeScript = async (res) => {
+//(async () => {
   let success = false; // Variable para indicar si la ejecución fue exitosa
 
   //const browser = await puppeteer.launch({ headless:true, args: ['--no-sandbox'] });
@@ -165,5 +165,5 @@ if (inputElement) {
     // Cerrar el navegador al finalizar
     await browser.close();
   }
-})();
+};
 module.exports = { scrapeScript };

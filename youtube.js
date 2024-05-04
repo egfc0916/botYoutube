@@ -5,7 +5,8 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-(async () => {
+const scrapeYoutube = async (res) => {
+//(async () => {
 
   
 
@@ -144,5 +145,5 @@ await page.evaluate(() => {
     // Cerrar el navegador al finalizar
     await browser.close();
   }
-})();
+};
 module.exports = { scrapeYoutube };
