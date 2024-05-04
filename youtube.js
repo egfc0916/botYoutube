@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+require("dotenv").config();
 const fs = require("fs").promises;
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -14,7 +15,20 @@ const sleep = (milliseconds) => {
   const maxTiempo = 180000; // 18 segundos
 
 
-  const browser = await puppeteer.launch({ headless:true, args: ['--no-sandbox'] });
+ // const browser = await puppeteer.launch({ headless:true, args: ['--no-sandbox'] });
+
+  const browser = await puppeteer.launch({
+    args: [
+      "--disable-setuid-sandbox",
+      "--no-sandbox",
+      "--single-process",
+      "--no-zygote",
+    ],
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
+  });
   //const browser = await puppeteer.launch();
   const page = await browser.newPage();
   try {
@@ -131,3 +145,4 @@ await page.evaluate(() => {
     await browser.close();
   }
 })();
+module.exports = { scrapeYoutube };
